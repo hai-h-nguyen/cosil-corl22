@@ -45,10 +45,7 @@ class Critic_RNN(nn.Module):
         ### Build Model
         ## 1. embed action, state (Feed-forward layers first)
         if isinstance(obs_dim, tuple) and len(obs_dim) == 3:
-            if obs_dim == (7, 7, 3):
-                # Mini-grid observation
-                self.state_encoder = utl.MinigridObsFeatureExtractor(obs_dim)
-            elif obs_dim == (84, 84, 3):
+            if obs_dim == (84, 84, 3):
                 # Block Picking observation
                 self.block_stacking = True
                 self.state_encoder = utl.BlockStackingObsFeatureExtractor(obs_dim)
@@ -95,10 +92,7 @@ class Critic_RNN(nn.Module):
 
         ## 3. build another obs+act branch
         if isinstance(obs_dim, tuple):
-            if obs_dim == (7, 7, 3):
-                # Mini-grid observation
-                self.current_state_action_encoder = utl.MinigridObsFeatureExtractor(obs_dim)
-            elif obs_dim == (84, 84, 3):
+            if obs_dim == (84, 84, 3):
                 self.block_stacking = True
                 # Block-stacking observation
                 self.current_state_action_encoder = utl.BlockStackingObsActFeatureExtractor(

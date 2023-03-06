@@ -1,0 +1,7 @@
+[submodule "pomdp_robot_domains"]
+	path = pomdp_robot_domains
+	url = https://github.com/hai-h-nguyen/pomdp_robot_domains.git
+[submodule "pomdp-domains"]
+	path = pomdp-domains
+	url = https://github.com/hai-h-nguyen/pomdp-domains.git
+	branch = corl22

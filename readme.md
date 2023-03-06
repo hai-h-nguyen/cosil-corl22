@@ -31,16 +31,33 @@ https://github.com/hai-h-nguyen/pomdp-domains/tree/corl22
 ```
 
 ### Install Env
-1. Clone this repository
 1. Install [anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/)
+
 1. Create and activate environment, install required packages
+
 ```
-conda create --env test_cosil python=3.8.5
+conda create --env cosil python=3.8.5
 conda activate cosil
+```
+1. Clone this repository
+```
+git clone --recursive https://github.com/hai-h-nguyen/cosil-corl22.git
 pip install -r requirements.txt
 ```
-1. Install Pytorch
-
+1. Install domains
+```
+cd pomdp_robot_domains
+pip install -r requirements.txt
+pip install -e .
+cd ..
+cd pomdp-domains
+pip install -e .
+cd ..
+```
+1. Install Pytorch (I used 1.12.0 for cuda 10.2 but other versions should work)
+```
+conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=10.2 -c pytorch
+```
 ---
 
 ## Train

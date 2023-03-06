@@ -60,11 +60,7 @@ class ModelFreeOffPolicy_MLP(nn.Module):
         self.actor_state_encoder = None
         self.critic_state_encoder = None
         if isinstance(obs_dim, tuple) and len(obs_dim) == 3:
-            if obs_dim == (7, 7, 3):
-                # Mini-grid observation
-                self.actor_state_encoder = utl.MLPMinigridObsFeatureExtractor(obs_dim)
-                self.critic_state_encoder = utl.MLPMinigridObsFeatureExtractor(obs_dim)
-            elif obs_dim == (84, 84, 3):
+            if obs_dim == (84, 84, 3):
                 # Block Picking observation
                 self.actor_state_encoder = utl.MLPBlockStackingObsFeatureExtractor(obs_dim)
                 self.critic_state_encoder = utl.MLPBlockStackingObsFeatureExtractor(obs_dim)

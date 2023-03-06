@@ -11,9 +11,6 @@ from gym.spaces import Box, Discrete, Tuple
 from itertools import product
 from typing import cast
 
-import gym_minigrid.minigrid
-
-
 def get_grad_norm(model):
     grad_norm = []
     for p in list(filter(lambda p: p.grad is not None, model.parameters())):
@@ -321,87 +318,9 @@ class LinearSchedule:
         value = self.value_from + step * step_size
         return value
 
-
-class MinigridObsFeatureExtractor(nn.Module):
-    """
-    Used for extracting features for Minigrid-like observations, based on
-    https://github.com/lcswillems/rl-starter-files/blob/master/model.py
-    """
-    def __init__(self, obs_dim):  # m, n is the first 2 dimensions of observation
-        super(MinigridObsFeatureExtractor, self).__init__()
-
-        assert (isinstance(obs_dim, tuple))
-
-        self.obs_dim = obs_dim
-
-        # Define image embedding
-        self.image_conv = nn.Sequential(
-            nn.Conv2d(3, 16, (2, 2)),
-            nn.ReLU(),
-            nn.MaxPool2d((2, 2)),
-            nn.Conv2d(16, 32, (2, 2)),
-            nn.ReLU(),
-            nn.Conv2d(32, 64, (2, 2)),
-            nn.ReLU()
-        )
-
-        n = obs_dim[0]
-        m = obs_dim[1]
-
-        self._output_size = ((n-1)//2-2)*((m-1)//2-2)*64
-
-    def forward(self, inputs):
-        length = inputs.shape[0]
-        batch_size = inputs.shape[1]
-        inputs = inputs.reshape(-1, *self.obs_dim)
-        x = inputs.transpose(1, 3).transpose(2, 3).contiguous()
-        x = self.image_conv(x)
-        return x.reshape(length, batch_size, self._output_size)
-
-    def get_output_size(self):
-        return self._output_size
-
-
-class MLPMinigridObsFeatureExtractor(nn.Module):
-    """
-    Used for extracting features for Minigrid-like observations, based on
-    https://github.com/lcswillems/rl-starter-files/blob/master/model.py
-    """
-    def __init__(self, obs_dim):  # m, n is the first 2 dimensions of observation
-        super(MLPMinigridObsFeatureExtractor, self).__init__()
-
-        assert (isinstance(obs_dim, tuple))
-
-        self.obs_dim = obs_dim
-
-        # Define image embedding
-        self.image_conv = nn.Sequential(
-            nn.Conv2d(3, 16, (2, 2)),
-            nn.ReLU(),
-            nn.MaxPool2d((2, 2)),
-            nn.Conv2d(16, 32, (2, 2)),
-            nn.ReLU(),
-            nn.Conv2d(32, 64, (2, 2)),
-            nn.ReLU()
-        )
-
-        n = obs_dim[0]
-        m = obs_dim[1]
-
-        self._output_size = ((n-1)//2-2)*((m-1)//2-2)*64
-
-    def forward(self, inputs):
-        x = inputs.transpose(1, 3).transpose(2, 3).contiguous()
-        x = self.image_conv(x)
-        return x.reshape(-1, self._output_size)
-
-    def get_output_size(self):
-        return self._output_size
-
-
 class BlockStackingObsActFeatureExtractor(nn.Module):
     """
-    Used for extracting features for Minigrid-like observations, based on
+    Used for extracting features for observations, based on
     https://github.com/lcswillems/rl-starter-files/blob/master/model.py
     """
     def __init__(self,
@@ -527,96 +446,6 @@ class BlockStackingObsFeatureExtractor(nn.Module):
 
     def get_output_size(self):
         return self._output_size
-
-
-class MinigridEmbedFeatureExtractor(nn.Module):
-    """
-    Used for extracting features for Minigrid-like observations, based on
-    https://github.com/allenai/allenact/blob/main/allenact_plugins/minigrid_plugin/minigrid_models.py
-    """
-    def __init__(self, obs_dim, object_embedding_dim=8):
-        super(MinigridEmbedFeatureExtractor, self).__init__()
-
-        assert (isinstance(obs_dim, tuple))
-
-        self.obs_dim = obs_dim
-
-        self.num_objects = (
-            cast(
-                int, max(map(abs, gym_minigrid.minigrid.OBJECT_TO_IDX.values()))  # type: ignore
-            )
-            + 1
-        )
-        self.num_colors = (
-            cast(int, max(map(abs, gym_minigrid.minigrid.COLOR_TO_IDX.values())))  # type: ignore
-            + 1
-        )
-        self.num_states = (
-            cast(int, max(map(abs, gym_minigrid.minigrid.STATE_TO_IDX.values())))  # type: ignore
-            + 1
-        )
-
-        self.num_channels = 0
-
-        self.object_embedding_dim = object_embedding_dim
-
-        if self.num_objects > 0:
-            # Object embedding
-            self.object_embedding = nn.Embedding(
-                num_embeddings=self.num_objects, embedding_dim=self.object_embedding_dim
-            )
-            self.object_channel = self.num_channels
-            self.num_channels += 1
-
-        if self.num_colors > 0:
-            # Same dimensionality used for colors and states
-            self.color_embedding = nn.Embedding(
-                num_embeddings=self.num_colors, embedding_dim=self.object_embedding_dim
-            )
-            self.color_channel = self.num_channels
-            self.num_channels += 1
-
-        if self.num_states > 0:
-            self.state_embedding = nn.Embedding(
-                num_embeddings=self.num_states, embedding_dim=self.object_embedding_dim
-            )
-            self.state_channel = self.num_channels
-            self.num_channels += 1
-
-        self._output_size = np.prod(self.obs_dim) * self.object_embedding_dim
-
-    def forward(self, inputs):
-        length = inputs.shape[0]
-        batch_size = inputs.shape[1]
-        inputs = inputs.reshape(-1, *self.obs_dim)
-
-        embed_list = []
-
-        if self.num_objects > 0:
-            ego_object_embeds = self.object_embedding(
-                inputs[..., self.object_channel].long()
-            )
-            embed_list.append(ego_object_embeds)
-
-        if self.num_colors > 0:
-            ego_color_embeds = self.color_embedding(
-                inputs[..., self.color_channel].long()
-            )
-            embed_list.append(ego_color_embeds)
-
-        if self.num_states > 0:
-            ego_state_embeds = self.state_embedding(
-                inputs[..., self.state_channel].long()
-            )
-            embed_list.append(ego_state_embeds)
-
-        ego_embeds = torch.cat(embed_list, dim=-1)
-
-        return ego_embeds.reshape(length, batch_size, self._output_size)
-
-    def get_output_size(self):
-        return self._output_size
-
 
 def sample_gaussian(mu, logvar, num=None):
     if num is None:

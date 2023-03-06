@@ -57,10 +57,7 @@ class Actor_RNN(nn.Module):
         ### Build Model
         ## 1. embed action, state (Feed-forward layers first)
         if isinstance(obs_dim, tuple):
-            if obs_dim == (7, 7, 3):
-                # Mini-grid observation
-                self.state_encoder = utl.MinigridObsFeatureExtractor(obs_dim)
-            elif obs_dim == (84, 84, 3):
+            if obs_dim == (84, 84, 3):
                 # Block picking observation
                 self.state_encoder = utl.BlockStackingObsFeatureExtractor(obs_dim)
             else:
@@ -102,10 +99,7 @@ class Actor_RNN(nn.Module):
 
         ## 3. build another obs branch
         if isinstance(obs_dim, tuple):
-            if obs_dim == (7, 7, 3):
-                # Mini-grid observation
-                self.current_state_encoder = utl.MinigridObsFeatureExtractor(obs_dim)
-            elif obs_dim == (84, 84, 3):
+            if obs_dim == (84, 84, 3):
                 # Block Picking observation
                 self.current_state_encoder = utl.BlockStackingObsFeatureExtractor(obs_dim)
             else:
