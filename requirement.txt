@@ -8,3 +8,4 @@ seaborn
 mujoco-py==2.1.2.14
 stable_baselines3
 more_itertools
+tensorboard
