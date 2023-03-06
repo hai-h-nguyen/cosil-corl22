@@ -102,7 +102,7 @@ python3 policies/main.py --cfg configs/pomdp/blockpicking/rnn.yml --algo sac/sac
 ---
 ## Visualization using Tensorboard
 ```
-tensorboard --logdir logs/folder
+tensorboard --logdir logs/folder_to_plot
 ```
 
 ---
