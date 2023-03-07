@@ -25,17 +25,17 @@ This is the repo stored the code for our paper [Leveraging Fully Observable Poli
 
 ## Setup
 1. Install [anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/)
-1. Create and activate environment
+2. Create and activate environment
 ```
 conda create --env cosil python=3.8.5
 conda activate cosil
 ```
-1. Clone this repository and install required packages
+3. Clone this repository and install required packages
 ```
 git clone --recursive https://github.com/hai-h-nguyen/cosil-corl22.git
 pip install -r requirements.txt
 ```
-1. Install domains
+4. Install domains
 ```
 cd pomdp_robot_domains
 pip install -r requirements.txt
@@ -45,7 +45,7 @@ cd pomdp-domains
 pip install -e .
 cd ..
 ```
-1. Install [Pytorch](https://pytorch.org/get-started/previous-versions/) (I used 1.12.0 for cuda 10.2 but other versions should work)
+5. Install [Pytorch](https://pytorch.org/get-started/previous-versions/) (I used 1.12.0 for cuda 10.2 but other versions should work)
 ```
 conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=10.2 -c pytorch
 ```
