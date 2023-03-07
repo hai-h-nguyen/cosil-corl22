@@ -25,12 +25,12 @@ This is the repo stored the code for our paper [Leveraging Fully Observable Poli
 
 ## Setup
 1. Install [anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/)
-1. Create and activate environment, install required packages
+1. Create and activate environment
 ```
 conda create --env cosil python=3.8.5
 conda activate cosil
 ```
-1. Clone this repository
+1. Clone this repository and install required packages
 ```
 git clone --recursive https://github.com/hai-h-nguyen/cosil-corl22.git
 pip install -r requirements.txt
