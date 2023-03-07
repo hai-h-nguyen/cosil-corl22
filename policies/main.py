@@ -145,7 +145,7 @@ if algo in ['bcd-sacd', 'bc-sac']:
     exp_id += f"w_bc-{v['policy']['w_bc']}/"
 
 if algo in ['saca', 'sacda']:
-    exp_id += f"alpha-{v['policy']['alpha']}/"
+    exp_id += f"alpha-{v['policy']['entropy_alpha']}/"
 
 if algo in ['bcd2sacd', 'bc2sac']:
     exp_id += f"alpha-{v['policy']['bc_perc']}/"

@@ -1,9 +1,26 @@
-python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacde --target_entropy 1.0 --seed 0 --cuda 0
-python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacde --target_entropy 1.0 --seed 1 --cuda 1
-python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacde --target_entropy 1.0 --seed 2 --cuda 2
-python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacde --target_entropy 1.0 --seed 3 --cuda 3
+# python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacde --target_entropy 1.0 --seed 0 --cuda 0
+# python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacde --target_entropy 1.0 --seed 1 --cuda 1
+# python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacde --target_entropy 1.0 --seed 2 --cuda 2
+# python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacde --target_entropy 1.0 --seed 3 --cuda 3
 
 # python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacda --target_entropy 0.0 --seed 0 --cuda 0
 # python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacda --target_entropy 0.0 --seed 1 --cuda 1
 # python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacda --target_entropy 0.0 --seed 2 --cuda 2
 # python3 policies/main.py --cfg configs/pomdp/bumps_1d/rnn.yml --algo sacda --target_entropy 0.0 --seed 3 --cuda 3
+
+# python3 policies/main.py --cfg configs/pomdp/bumps_2d/rnn.yml --algo sacde --target_entropy 1.0 --seed 0 --cuda 0
+# python3 policies/main.py --cfg configs/pomdp/bumps_2d/rnn.yml --algo sacde --target_entropy 1.0 --seed 1 --cuda 1
+# python3 policies/main.py --cfg configs/pomdp/bumps_2d/rnn.yml --algo sacde --target_entropy 1.0 --seed 2 --cuda 2
+# python3 policies/main.py --cfg configs/pomdp/bumps_2d/rnn.yml --algo sacde --target_entropy 1.0 --seed 3 --cuda 3
+
+# python3 policies/main.py --cfg configs/pomdp/bumps_2d/rnn.yml --algo sacda --target_entropy 0.0 --seed 0 --cuda 0
+# python3 policies/main.py --cfg configs/pomdp/bumps_2d/rnn.yml --algo sacda --target_entropy 0.0 --seed 1 --cuda 1
+# python3 policies/main.py --cfg configs/pomdp/bumps_2d/rnn.yml --algo sacda --target_entropy 0.0 --seed 2 --cuda 2
+# python3 policies/main.py --cfg configs/pomdp/bumps_2d/rnn.yml --algo sacda --target_entropy 0.0 --seed 3 --cuda 3
+
+python3 policies/main.py --cfg configs/pomdp/lunarlander/rnn_p.yml --algo sace --target_entropy -1.0 --seed 0 --cuda 0
+python3 policies/main.py --cfg configs/pomdp/lunarlander/rnn_p.yml --algo sace --target_entropy -1.0 --seed 1 --cuda 1
+
+python3 policies/main.py --cfg configs/pomdp/lunarlander/rnn_p.yml --algo saca --seed 0 --cuda 0
+python3 policies/main.py --cfg configs/pomdp/lunarlander/rnn_p.yml --algo saca --seed 1 --cuda 1
+
