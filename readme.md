@@ -81,7 +81,7 @@ python3 policies/main.py --cfg configs/mdp/bumps_2d/rnn.yml --algo sacd --target
 * COSIL (**sace**) / Behavior-Cloning (**bc**) / Recurrent SAC (**sac**) / Offpolicy-Advisor (**saca**)
 
 ```
-python3 policies/main.py --cfg configs/pomdp/lunarlander/rnn_p(rnn_v).yml --algo sace --target_entropy -1.0 --seed 0 --cuda 0
+python3 policies/main.py --cfg configs/pomdp/lunarlander/rnn_p(rnn_v).yml --algo sace --target_entropy 1.0 --seed 0 --cuda 0
 python3 policies/main.py --cfg configs/pomdp/lunarlander/rnn_p(rnn_v).yml --algo bc/saca/sac --seed 0 --cuda 0
 ```
 
