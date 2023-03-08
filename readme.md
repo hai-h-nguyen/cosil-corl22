@@ -27,7 +27,7 @@ This is the repo stored the code for our paper [Leveraging Fully Observable Poli
 1. Install [anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/)
 2. Create and activate environment
 ```
-conda create --env cosil python=3.8.5
+conda create --name cosil python=3.8.5
 conda activate cosil
 ```
 3. Clone this repository and install required packages
